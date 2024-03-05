@@ -56,10 +56,11 @@ export const getSingleDoctor = async (req, res) => {
 };
 
 export const getAllDoctor = async (req, res) => {
+  console.log("doctors", req.query);
   try {
     //search garda ko lagi query parameters
 
-    const { query } = req.query;
+    const query = req.query.query;
     let doctors;
 
     if (query) {

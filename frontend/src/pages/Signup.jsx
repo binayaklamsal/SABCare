@@ -5,79 +5,67 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import uploadImageToCloudinary from "../utils/uploadCloudinary";
 import { BASE_URL } from "../config";
-import {toast} from 'react-toastify'
-import HashLoader from 'react-spinners/HashLoader'
+import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewURL, setPreviewURL] = useState("");
-  const [loading, setLoading] = useState(false)
-
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-   name:"",
+    name: "",
     email: "",
     password: "",
     photo: selectedFile,
-    gender:"",
-    role:"patient",
-     
+    gender: "",
+    role: "patient",
   });
 
-  const navigate = useNavigate()
- 
+  const navigate = useNavigate();
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    
   };
 
-
-
-  const handleFileInputChange = async event => {
+  const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
-    
-    const data = await uploadImageToCloudinary(file)
 
-    setPreviewURL(data.url)
-    setSelectedFile(data.url)
-    setFormData({...formData, photo:data.url})
+    const data = await uploadImageToCloudinary(file);
 
+    setPreviewURL(data.url);
+    setSelectedFile(data.url);
+    setFormData({ ...formData, photo: data.url });
   };
 
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    setLoading(true);
 
-    const submitHandler = async event => {
-      event.preventDefault();
-      setLoading(true)
-      
+    try {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      try {
-        const res = await fetch(`${BASE_URL}/auth/register`,{
-          method:'post',
-          headers:{
-            "Content-Type":"application/json"
-          },
-          
-          body: JSON.stringify(formData)
-        })
-       
-       const {message} = await res.json()
-    
+        body: JSON.stringify(formData),
+      });
 
-       if(!res.ok){
-        throw new Error(message)
-       }
+      const { message } = await res.json();
 
-       setLoading(false)
-       toast.success(message)
-       navigate('/login')
-
-      } catch (err) {
-        
-        toast.error(err.message)
-        setLoading(false)
+      if (!res.ok) {
+        throw new Error(message);
       }
-    };
+
+      setLoading(false);
+      toast.success(message);
+      navigate("/login");
+    } catch (err) {
+      toast.error(err.message);
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="px-5 xl:px-0">
@@ -106,10 +94,9 @@ const Signup = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
- />
-                                    {/* <p className="px-4 py-2 text-red-500">{formError?.name }</p> */}
-
+                  />
                 </section>
+
                 <section className="mb-0.1 mt-[-30px]">
                   <input
                     type="email"
@@ -118,9 +105,7 @@ const Signup = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-                    
                   />
-                  {/* <p className="px-4 py-2 text-red-500">{formError?.email }</p> */}
                 </section>
                 <section className="mb-0.1 mt-[-30px]">
                   <input
@@ -130,17 +115,14 @@ const Signup = () => {
                     value={formData.password}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
-                    
                   />
-                  {/* <p className="px-4 py-2 text-red-500">{formError?.password }</p> */}
-                  
                 </section>
               </section>
 
-              <section className="mb-5 flex items-center justify-between  ">
+              <section className="mb-5 flex items-center justify-between">
                 <label
                   htmlFor=""
-                  className="text-headingColor font-bold text-[16px] leading-7 "
+                  className="text-headingColor font-bold text-[16px] leading-7"
                 >
                   Are you a:{" "}
                   <select
@@ -154,9 +136,40 @@ const Signup = () => {
                     <option value="doctor">Doctor</option>
                   </select>
                 </label>
+
+                {formData.role === "doctor" && (
+                  <label
+                    htmlFor=""
+                    className="text-headingColor font-bold text-[16px] leading-7"
+                  >
+                    Specialization:{" "}
+                    <select
+                      name="specialization"
+                      value={formData.specialization}
+                      onChange={handleInputChange}
+                      className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none"
+                      id="specialization"
+                    >
+                      <option value="">Select</option>
+                      <option value="Cardiologist">Cardiologist</option>
+                      <option value="Dermatologist">Dermatologist</option>
+                      <option value="Endocrinologist">Endocrinologist</option>
+                      <option value="Gastroenterologist">
+                        Gastroenterologist
+                      </option>
+                      <option value="Hematologist">Hematologist</option>
+                      <option value="Nephrologist">Nephrologist</option>
+                      <option value="Oncologist">Oncologist</option>
+                      <option value="Pediatrician">Pediatrician</option>
+                      <option value="Pulmonologist">Pulmonologist</option>
+                      <option value="Rheumatologist">Rheumatologist</option>
+                    </select>
+                  </label>
+                )}
+
                 <label
                   htmlFor=""
-                  className="text-headingColor font-bold text-[16px] leading-7 "
+                  className="text-headingColor font-bold text-[16px] leading-7"
                 >
                   Gender:{" "}
                   <select
@@ -174,41 +187,28 @@ const Signup = () => {
                 </label>
               </section>
 
-              <section className="mb-5 flex  items-center gap-3 ">
-                { selectedFile && (
-                   <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center ">
-                  <img
-                   src={previewURL}
-                    alt="" 
-                    className="w-full rounded-full " 
-                    />
-                </figure>)}
-
-                <section className="relative w-[130px] h-[50px]">
+              {formData.role === "doctor" && (
+                <section>
                   <input
-                    type="file"
-                    name="photo"
-                    onChange={handleFileInputChange}
-                    id="customfile"
-                    accept=".jpg, .png"
-                    className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                    type="number"
+                    id="charges"
+                    name="charges"
+                    placeholder="Enter charges"
+                    className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
                   />
-
-                  <label
-                    htmlFor="customfile"
-                    className=" Upload-Photo absolute  top-0 left-2 w-full h-full flex items-center px-[1.75rem ] py-[5px] pt-[10px] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer"
-                  >
-                    Upload Photo
-                  </label>
                 </section>
+              )}
+              <section className="mb-5 flex items-center gap-3">
+            
               </section>
+
               <section className="mt-[-30px]">
                 <button
-                  disabled={loading &&  true}
+                  disabled={loading && true}
                   type="submit"
                   className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-2"
                 >
-                  { loading ? <HashLoader size={35} color="#ffff" />:"Sign Up"}
+                  {loading ? <HashLoader size={35} color="#ffff" /> : "Sign Up"}
                 </button>
               </section>
               <section>
@@ -216,7 +216,7 @@ const Signup = () => {
                   Already have an account?{" "}
                   <Link
                     to="/login"
-                    className="text-primaryColor font-medium ml-1 "
+                    className="text-primaryColor font-medium ml-1"
                   >
                     LogIn
                   </Link>

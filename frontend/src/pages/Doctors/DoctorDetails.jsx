@@ -61,10 +61,10 @@ const DoctorDetails = () => {
                   </h3>
 
                   <section className="flex mt-[-12px] flex-row gap-0">
-                    <span className="flex items-center mt-[-20px] gap-[6px] text-[14px] leading lg:text-[16px] lg:leading-7 font-semibold text-headingColor">
+                  {averageRating !== undefined && ( <span className="flex items-center mt-[-20px] gap-[6px] text-[14px] leading lg:text-[16px] lg:leading-7 font-semibold text-headingColor">
                       <img src={starIcon} alt="" />
-                      {averageRating.toFixed(2)}&nbsp;
-                    </span>
+                      {averageRating.toFixed(2)} &nbsp;
+                    </span>)} 
                     <span className="flex text-[14px] mt-[-12px] leading lg:text-[16px] lg:leading-7 font-[400] text-textColor">
                       ({totalRating})
                     </span>

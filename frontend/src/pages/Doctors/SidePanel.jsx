@@ -2,17 +2,24 @@
 
 import { BASE_URL, token } from "./../../config";
 import convertTime from "./../../utils/convertTime";
+// import { useHistory } from "react-router-dom";
 
 const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
+  console.log(localStorage.token, "asdasd");
 
   const bookingHandler = async () => {
+    // const history = useHistory();
+    if (!localStorage.token) {
+      // history.push("/register ");
+      // return;
+    }
     try {
       const res = await fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}`,
         {
           method: "post",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.token}`,
           },
         }
       );
@@ -27,8 +34,8 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
         window.location.href = data.session.url;
       }
     } catch (err) {
-    //   toast.error(err.message);
-    console.log("error", err);
+      // toast.error(err.message);
+      console.log("error", err);
     }
   };
 
@@ -37,8 +44,8 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
       <section className="flex items-center justify-between ">
         <p className="text__para mt-0 font-semibold ">Ticket Price</p>
         <span className="text-[16px] leading-7 lg:text-[22px] lg:leading-8 text-headingColor font-bold">
-            NPR {ticketPrice}
-            </span>
+          NPR {ticketPrice}
+        </span>
       </section>
       <section className="mt-[30px]">
         <p className="text__para mt-0 font-semibold text-headingColor ">

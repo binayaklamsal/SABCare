@@ -1,25 +1,20 @@
-import React, { useState,useContext } from "react";
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import {BASE_URL} from "../config"
-import {toast} from 'react-toastify'
-import {authContext} from "../context/AuthContext.jsx"
-import { HashLoader } from 'react-spinners/HashLoader';
-
-
-
-
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../config";
+import { toast } from "react-toastify";
+import { authContext } from "../context/AuthContext.jsx";
+import { HashLoader } from "react-spinners/HashLoader";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-   const [loading, setLoading] = useState(false)
-   const navigate = useNavigate()
-   const {dispatch} = useContext(authContext) 
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { dispatch } = useContext(authContext);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,46 +22,41 @@ const Login = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    setLoading(true)
-    
+    setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/login`,{
-        method:'post',
-        headers:{
-          "Content-Type":"application/json"
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
         },
-        
+
         body: JSON.stringify(formData),
-      })
-     
-     const result  = await res.json();
-  
+      });
 
-     if(!res.ok){
-      throw new Error(result.message);
-     }
+      const result = await res.json();
+      console.log(result, "show result");
 
-
-     dispatch({
-      type:'LOGIN_SUCCESS',
-      payload:{
-        user:result.data,
-        token:result.token,
-        role:result.role,
+      if (!res.ok) {
+        throw new Error(result.message);
       }
-     })
-console.log(result,'login data')
 
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          user: result.data,
+          token: result.token,
+          role: result.role,
+        },
+      });
+      console.log(result, "login data");
 
-     setLoading(false)
-     toast.success(result.message)
-     navigate('/home')
-
+      setLoading(false);
+      toast.success(result.message);
+      navigate("/home");
     } catch (err) {
-      
-      toast.error(err.message)
-      setLoading(false)
+      toast.error(err.message);
+      setLoading(false);
     }
   };
 
@@ -85,8 +75,9 @@ console.log(result,'login data')
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer" required
-              />
+              className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
+              required
+            />
           </div>
           <div className="mb-5">
             <input
@@ -95,28 +86,30 @@ console.log(result,'login data')
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer" required
-              />
+              className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
+              required
+            />
           </div>
 
-            <section className="mt-7">
-                    <button type="submit" className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-2">
-                      login {/* {loading ===true  ? <HashLoader size ={25} color="#fff"/>:"Login"} */}
-                    </button>
-            </section>
+          <section className="mt-7">
+            <button
+              type="submit"
+              className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-2"
+            >
+              login{" "}
+              {/* {loading ===true  ? <HashLoader size ={25} color="#fff"/>:"Login"} */}
+            </button>
+          </section>
 
-            <p className="mt-5 text-textColor text-center" >
-             
-             
-              Don't have an account? 
-              {" "}
-              <Link to='/register'  className="text-primaryColor font-medium ml-1 ">
-                        Register
-              </Link>
-
-            </p>
-
-
+          <p className="mt-5 text-textColor text-center">
+            Don't have an account?{" "}
+            <Link
+              to="/register"
+              className="text-primaryColor font-medium ml-1 "
+            >
+              Register
+            </Link>
+          </p>
         </form>
       </section>
     </section>
