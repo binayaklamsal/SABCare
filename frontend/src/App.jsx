@@ -3,13 +3,11 @@ import "./app.css";
 import Layout from "./layout/Layout";
 
 function App() {
-  return <>
-  {/* <Layout /> */}
-
-
-  <AdminDashboard/>
-
-  </>;
+  return (
+    <>
+      <Layout />
+    </>
+  );
 }
 
 export default App;
