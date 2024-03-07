@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
 
-import { BASE_URL, token } from "./../../config";
+import { Navigate, useNavigate } from "react-router-dom";
+import { BASE_URL } from "./../../config";
 import convertTime from "./../../utils/convertTime";
-// import { useHistory } from "react-router-dom";
 
 const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
-  console.log(localStorage.token, "asdasd");
-
+  const navigate = useNavigate();
   const bookingHandler = async () => {
-    // const history = useHistory();
     if (!localStorage.token) {
-      // history.push("/register ");
+      //  console.log("Please Log in");
+      // navigate("/login");
       // return;
     }
+
     try {
       const res = await fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}`,
@@ -20,6 +20,7 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
           method: "post",
           headers: {
             Authorization: `Bearer ${localStorage.token}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -27,15 +28,19 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message + "Please try again");
+        if (res.status === 401 && data.message === "Invalid token") {
+          console.error("Invalid token. Please log in again.");
+          return <Navigate to="/login" />;
+        }
+        // Handle other errors
+        throw new Error(data.message + " Please try again");
       }
 
       if (data.session.url) {
         window.location.href = data.session.url;
       }
     } catch (err) {
-      // toast.error(err.message);
-      console.log("error", err);
+      console.error("Error:", err);
     }
   };
 

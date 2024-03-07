@@ -19,7 +19,9 @@ const Signup = () => {
     password: "",
     photo: selectedFile,
     gender: "",
-    role: "patient",
+    role: "",
+    specialization:"",
+    charges:""
   });
 
   const navigate = useNavigate();
@@ -193,13 +195,30 @@ const Signup = () => {
                     type="number"
                     id="charges"
                     name="charges"
+                    value={formData.charges}
                     placeholder="Enter charges"
                     className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
                   />
                 </section>
               )}
               <section className="mb-5 flex items-center gap-3">
-            
+                <section className="relative w-[130px] h-[50px]">
+                  <input
+                    type="file"
+                    name="photo"
+                    onChange={handleFileInputChange}
+                    id="customfile"
+                    accept=".jpg, .png"
+                    className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+
+                  <label
+                    htmlFor="customfile"
+                    className=" Upload-Photo absolute  top-0 left-2 w-full h-full flex items-center px-[1.75rem ] py-[5px] pt-[10px] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer"
+                  >
+                    Upload Photo
+                  </label>
+                </section>
               </section>
 
               <section className="mt-[-30px]">

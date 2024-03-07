@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { token } from "../config";
 
 const useFetchData = (url) => {
-  console.log("i am url", url);
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,7 +16,6 @@ const useFetchData = (url) => {
         });
 
         const result = await res.json();
-        console.log("this is result from the hook", result);
 
         if (!res.ok) {
           throw new Error(result.message + "😭");
