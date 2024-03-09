@@ -77,6 +77,8 @@ export const getAllDoctor = async (req, res) => {
       );
     }
 
+    console.log({ doctors });
+
     res.status(200).json({
       success: true,
       message: "Users found",
@@ -84,6 +86,78 @@ export const getAllDoctor = async (req, res) => {
     });
   } catch (err) {
     res.status(404).json({ success: false, message: "Not found" });
+  }
+};
+
+export const getPendingDoctors = async (req, res) => {
+  console.log("doctors", req.query);
+  try {
+    //search garda ko lagi query parameters
+
+    const query = req.query.query;
+    let doctors;
+
+    if (query) {
+      doctors = await Doctor.find({
+        isApproved: "pending",
+        $or: [
+          { name: { $regex: query, $options: "i" } },
+          { specialization: { $regex: query, $options: "i" } },
+        ],
+      }).select("-password");
+    } else {
+      doctors = await Doctor.find({ isApproved: "pending" }).select(
+        "-password"
+      );
+    }
+
+    console.log({ doctors });
+
+    res.status(200).json({
+      success: true,
+      message: "Users found",
+      data: doctors,
+    });
+  } catch (err) {
+    res.status(404).json({ success: false, message: "Not found" });
+  }
+};
+
+export const approveDoctor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedDoctor = await Doctor.findByIdAndUpdate(id, {
+      $set: {
+        isApproved: "approved",
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Sucessfully Approved",
+      data: updatedDoctor,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to approve" });
+  }
+};
+
+export const declineDoctor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedDoctor = await Doctor.findByIdAndUpdate(id, {
+      $set: {
+        isApproved: "cancelled",
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Sucessfully Declined",
+      data: updatedDoctor,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to decline" });
   }
 };
 

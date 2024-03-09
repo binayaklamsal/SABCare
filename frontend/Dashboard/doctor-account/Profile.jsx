@@ -41,6 +41,7 @@ const Profile = ({ doctorData }) => {
   }, [doctorData]);
 
   const handleInputChange = (e) => {
+    console.log({ [e.target.name]: e.target.value });
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -230,6 +231,7 @@ const Profile = ({ doctorData }) => {
                 value={formData.gender}
                 onChange={handleInputChange}
                 className="form__input py-3.5"
+                defaultValue="male"
               >
                 <option value="">Select</option>
                 <option value="male">Male</option>

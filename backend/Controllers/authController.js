@@ -4,7 +4,6 @@ import Doctor from "../models/DoctorSchema.js";
 import User from "../models/UserSchema.js";
 
 const generateToken = (user) => {
-
   console.log("envs", process.env.JWT_SECRET_KEY, user);
   return jwt.sign(
     { id: user._id, role: user.role },
@@ -17,7 +16,7 @@ const generateToken = (user) => {
 
 export const register = async (req, res) => {
   const { email, password, name, role, photo, gender } = req.body;
-  console.log(req.body);
+  console.log(req.body, "asdjhgashjdbasudbasdj 098907");
 
   try {
     let user;

@@ -20,13 +20,15 @@ const Signup = () => {
     photo: selectedFile,
     gender: "",
     role: "",
-    specialization:"",
-    charges:""
+    specialization: "",
+    charges: "",
   });
 
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
+    console.log({ [e.target.name]: e.target.value });
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -196,6 +198,7 @@ const Signup = () => {
                     id="charges"
                     name="charges"
                     value={formData.charges}
+                    onChange={handleInputChange}
                     placeholder="Enter charges"
                     className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
                   />

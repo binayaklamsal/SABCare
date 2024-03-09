@@ -30,7 +30,7 @@ export const getCheckoutSession = async (req, res) => {
             product_data: {
               name: doctor.name,
               description: doctor.bio,
-              images: [doctor.photo],
+              images: [doctor.photo || "empty"],
             },
           },
           quantity: 1,
