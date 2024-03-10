@@ -20,11 +20,11 @@ const Home = () => {
   return (
     <>
       {/*=======Hero Section========*/}
-      <section className="hero__section pt-[60px] 2xl:h-[800px]">
+      <section className="hero__section pt-[60px] 2xl:h-screen">
         <div className="container">
           <div className="flex flex-col lg:flex-row gap-[90px] items-center justify-between">
             {/*=====hero content====*/}
-            <div className="flex flex-col lg:flex-row items-center lg:justify-between w-full">
+            <div className="flex flex-col lg:flex-row items-center justify-between w-full mx-4 ">
               <div className="lg:w-[570px] text-center lg:text-between px-[-50px]">
                 {/* Center content in small screens */}
                 <h1 className="text-[36px] leading-[46px]  text-headingColor font-bold md:text-[60px] md:leading-[70px]">
@@ -69,16 +69,18 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              {/* Image grid on the right */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:w-[770px] ">
+              {/* Image grid on the right grid grid-cols-2 justify-between lg:grid-cols-3 gap-4 lg:w-[770px] */}
+              <div className=" flex flex-row justify-between gap-4 ">
                 <img
                   src={heroImg01}
                   alt=""
-                  className="w-full row-span-2 h-full object-cover"
+                  className=" row-span-2  object-cover"
                 />
-                <img src={heroImg02} alt="" className="w-full  mb-[30px] " />{" "}
-                <br />
-                <img src={heroImg03} alt="" className="w-full h-auto" />
+                <div>
+                  <img src={heroImg02} alt="" className="w-full  mb-[30px] " />{" "}
+                  <br />
+                  <img src={heroImg03} alt="" className="w-full h-auto" />
+                </div>
               </div>
             </div>
           </div>
@@ -185,8 +187,8 @@ const Home = () => {
       {/* =======Feature Section======= */}
 
       <section>
-        <div className="container">
-          <div className="flex items-center justify-between flex-col lg:flex-row">
+        <div className="container ">
+          <div className="flex items-center flex-row mx-9">
             {/* =======Feature Section======= */}
             <div className="xl:w-[670px]">
               <h2 className="heading">

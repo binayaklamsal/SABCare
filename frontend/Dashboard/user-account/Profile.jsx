@@ -31,9 +31,7 @@ const Profile = ({ user }) => {
 
   const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
-
     const data = await uploadImageToCloudinary(file);
-
     setSelectedFile(data.url);
     setFormData({ ...formData, photo: data.url });
   };

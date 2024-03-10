@@ -20,7 +20,7 @@ const MyAccount = () => {
   console.log(userData, "userdata");
 
   const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
+    localStorage.clear();
   };
   return (
     <section>
@@ -40,7 +40,7 @@ const MyAccount = () => {
                 </figure>
               </div>
 
-              <div className="text-center mt-4">
+              <div className="flex flex-col text-center mt-4">
                 <h3 className="text-[18px] leading-[30px] text-headingColor font-bold ">
                   {userData.name}
                 </h3>
@@ -48,23 +48,23 @@ const MyAccount = () => {
                   {userData.email}
                 </p>
                 <p className="text-textColor text-[15px] leading-6 font-medium">
-                  Blood Type:{""}{" "}
+                  Blood Type:
                   <span className="ml-2 text-headingColor text-[22px] leading-8 ">
                     {userData.bloodType}
-                  </span>
+                  </span>{" "}
                 </p>
-              </div>
 
-              <div className="mt-[50px] md:mt-[100px]">
-                <button
-                  onClick={handleLogout}
-                  className="w-full bg-[#181A1E] p-3 text-[16px] leading-7 rounded-md text-white"
-                >
-                  Logout
-                </button>
-                <button className="w-full bg-red-700 mt-4 p-3 text-[16px] leading-7 rounded-md  text-white ">
-                  Delete account
-                </button>
+                <div className="my-3">
+                  <button
+                    onClick={handleLogout}
+                    className="border-1 bg-blue-500 "
+                  >
+                    Logout
+                  </button>
+                  <button className="w-full bg-blue-500  p-3 text-[16px]  rounded-md  ">
+                    Delete account
+                  </button>
+                </div>
               </div>
             </div>
             <div className="md:col-span-2 md:px-[30px]">
