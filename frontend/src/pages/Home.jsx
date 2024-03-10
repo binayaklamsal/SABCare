@@ -15,6 +15,7 @@ import About from "../components/About/About";
 import ServiceList from "../components/Services/SericeList";
 import DoctorList from "../components/Doctors/DoctorList";
 import FaqList from "../components/Faq/FaqList";
+import Testimonial from "../components/Testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -86,7 +87,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section>
         <div className="container">
           <div className="lg:w-[470px] mx-auto">
@@ -166,9 +166,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <About />
-
       {/*======Services section======== */}
       <section>
         <div className="container">
@@ -183,9 +181,7 @@ const Home = () => {
           <ServiceList />
         </div>
       </section>
-
       {/* =======Feature Section======= */}
-
       <section>
         <div className="container ">
           <div className="flex items-center flex-row mx-9">
@@ -248,7 +244,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* =======Doctor Section========*/}
       <section>
         <div className="container">
@@ -263,9 +258,7 @@ const Home = () => {
           <DoctorList />
         </div>
       </section>
-
       {/* ========faq section======= */}
-
       <div className="container">
         <div className="flex m-[20px] justify-between gap-[50px] lg:gap-0 ">
           <div className="w-1/2 hidden md:block">
@@ -279,24 +272,19 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      {/* +=====testtimonial====== 
-
+      +=====testtimonial======
       <section>
         <div className="container">
-           
-        <div className="xl:w-[470px] mx-auto">
-                  <h2 className="heading text-center">What our patient say</h2>
-                  <p className="text__para text-center">
-                    World-class care for everyone. Our health system offers unmatched, expert health care.
-                  </p>
-              </div>
-
-              <Testimonial />
+          <div className="xl:w-[470px] mx-auto">
+            <h2 className="heading text-center">What our patient say</h2>
+            <p className="text__para text-center">
+              World-class care for everyone. Our health system offers unmatched,
+              expert health care.
+            </p>
+          </div>
+          <Testimonial />
         </div>
       </section>
-
- */}
     </>
   );
 };
