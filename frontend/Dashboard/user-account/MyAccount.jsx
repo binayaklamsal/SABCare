@@ -20,7 +20,8 @@ const MyAccount = () => {
   console.log(userData, "userdata");
 
   const handleLogout = () => {
-    localStorage.clear();
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
   };
   return (
     <section>
@@ -41,21 +42,20 @@ const MyAccount = () => {
               </div>
 
               <div className="flex flex-col text-center mt-4">
-              <section>
-              <h3 className="text-[18px] leading-[30px] text-headingColor font-bold ">
-                  {userData.name}
-                </h3>
-                <p className="text-textColor text-[15px] leading-6 font-medium">
-                  {userData.email}
-                </p>
-                <p className="text-textColor text-[15px] leading-6 font-medium">
-                  Blood Type:
-                  <span className="ml-2 text-headingColor text-[22px] leading-8 ">
-                    {userData.bloodType}
-                  </span>{" "}
-                </p>
-
-              </section>
+                <section>
+                  <h3 className="text-[18px] leading-[30px] text-headingColor font-bold ">
+                    {userData.name}
+                  </h3>
+                  <p className="text-textColor text-[15px] leading-6 font-medium">
+                    {userData.email}
+                  </p>
+                  <p className="text-textColor text-[15px] leading-6 font-medium">
+                    Blood Type:
+                    <span className="ml-2 text-headingColor text-[22px] leading-8 ">
+                      {userData.bloodType}
+                    </span>{" "}
+                  </p>
+                </section>
                 <div className="flex flex-col gap-3 py-[1]">
                   <button
                     onClick={handleLogout}
