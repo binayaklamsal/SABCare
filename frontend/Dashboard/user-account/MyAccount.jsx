@@ -41,7 +41,8 @@ const MyAccount = () => {
               </div>
 
               <div className="flex flex-col text-center mt-4">
-                <h3 className="text-[18px] leading-[30px] text-headingColor font-bold ">
+              <section>
+              <h3 className="text-[18px] leading-[30px] text-headingColor font-bold ">
                   {userData.name}
                 </h3>
                 <p className="text-textColor text-[15px] leading-6 font-medium">
@@ -54,14 +55,15 @@ const MyAccount = () => {
                   </span>{" "}
                 </p>
 
-                <div className="my-3">
+              </section>
+                <div className="flex flex-col gap-3 py-[1]">
                   <button
                     onClick={handleLogout}
-                    className="border-1 bg-blue-500 "
+                    className="addQ border p-2 rounded-md bg-blue-500 "
                   >
                     Logout
                   </button>
-                  <button className="w-full bg-blue-500  p-3 text-[16px]  rounded-md  ">
+                  <button className="addD border p-2 rounded-md bg-blue-500  ">
                     Delete account
                   </button>
                 </div>

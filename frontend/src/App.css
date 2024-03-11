@@ -83,7 +83,6 @@ body {
 }
 
 .swiper-pagination-bullet {
-  padding-top: ;
   width: 12px;
   height: 12px;
   border: 1px solid #181a1e;
@@ -96,7 +95,7 @@ body {
 }
 
 .swiper {
-  padding-bottom: 100px;
+  padding-bottom: 70px;
 }
 
 .swiper-slide.swiper-slide-next {
@@ -107,4 +106,20 @@ body {
 .swiper-slide.swiper-slide-next h4,
 .swiper-slide.swiper-slide-next p {
   color: #fff;
+}
+
+.swiper-pagination {
+  top: 100%;
+}
+
+.tabs {
+  width: 255px;
+}
+
+.DelSVG {
+  color: red;
+}
+
+HiStar {
+  color: yellow;
 }

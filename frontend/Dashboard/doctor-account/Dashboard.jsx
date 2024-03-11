@@ -18,19 +18,19 @@ const Dashboard = () => {
 
   return (
     <section>
-      <div className="max-w-[1170px] px-5 mx-auto">
+      <section className=" pt-0 ">
         {loading && !error && <Loader />}
         {error && !loading && <Error />}
 
-        <div className="grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]">
-          <Tabs tab={tab} setTab={setTab} />
-          <div className="lg:col-span-2">
+        <section className=" grid grid-cols-2 gap-7 ">
+          <Tabs className="" tab={tab} setTab={setTab} />
+          <section className="flex flex-col gap-2 ">
             {data.isApproved === "pending" && (
-              <div className="flex p-4 mb-4 text-yellow-800 bg-yellow-500 rounded-lg">
+              <section className="flex flex-row gap-1 p-4 mb-4 h-9 text-yellow-800 bg-yellow-500 rounded-lg">
                 <svg
                   aria-hidden="true"
                   className="flex-shrink-0 w-5 h-5"
-                  fill="currentColor"
+                  fill="red"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -41,22 +41,21 @@ const Dashboard = () => {
                   ></path>
                 </svg>
 
-                <span className="sr-only">Info</span>
                 <div className="ml-3 text-sm font-medium">
-                  To get approval please complete your profile. We&apos;ll
+                  To get approval please complete your profile. We &apos;ll
                   review manually and approve within 3 days.
                 </div>
-              </div>
+              </section>
             )}
 
-            <div className="mt-8">
+            <section className="pt-2">
               {tab == "overview" && (
-                <div>
-                  <div className="flex items-center gap-4 mb-10">
+                <section className="">
+                  <div className="flex flex-col items-center gap-4 pt-2 mb-10">
                     <figure className="max-w-[200px] max-h-[200px]">
                       <img src={data?.photo} alt="" className="w-full" />
                     </figure>
-                    <div>
+                    <div className="flex flex-col gap-1">
                       <span className="bg-[#CCF0F3] text-irisBlueColor py-1 px-4 lg:py-2 lg:px-6 rounded text-[12px] leading-4 lg:text-[16px] lg:leading-6 font-semibold ">
                         {data.specialization}
                       </span>
@@ -64,7 +63,7 @@ const Dashboard = () => {
                         {data.name}
                       </h3>
 
-                      <div className="flex items-center gap-[6px]">
+                      <section className="flex flex-row items-center gap-1">
                         <span className="flex items-center gap-[6px] text-headingColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
                           <img src={starIcon} alt="" />
                           {data.averageRating}
@@ -73,11 +72,11 @@ const Dashboard = () => {
                         <span className=" text-textColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
                           ({data.totalRating})
                         </span>
-                      </div>
+                      </section>
 
-                      <p className="text__para font-[15px] lg:max-w-[390px] leading-6">
+                      {/* <p className="text__para font-[15px] lg:max-w-[390px] leading-6">
                         {data?.bio}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   <DoctorAbout
@@ -86,17 +85,17 @@ const Dashboard = () => {
                     qualifications={data.qualifications}
                     experiences={data.experiences}
                   />
-                </div>
+                </section>
               )}
 
               {tab == "appointments" && (
                 <Appointments appointments={data.appointments} />
               )}
               {tab == "settings" && <Profile doctorData={data} />}
-            </div>
-          </div>
-        </div>
-      </div>
+            </section>
+          </section>
+        </section>
+      </section>
     </section>
   );
 };

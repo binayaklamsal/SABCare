@@ -167,13 +167,13 @@ const Profile = ({ doctorData }) => {
   };
 
   return (
-    <div>
+    <section className="flex flex-col gap-4">
       <h2 className="text-headingColor font-bold text-[24px] leading-9 mb-10">
         Profile Informations
       </h2>
 
-      <form>
-        <div className="mb-5">
+      <form className="flex flex-col gap-1">
+        <section className="">
           <p className="form__label">Name*</p>
           <input
             type="text"
@@ -181,10 +181,10 @@ const Profile = ({ doctorData }) => {
             value={formData.name}
             onChange={handleInputChange}
             placeholder="Full Name"
-            className="form_input"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3 "
           />
-        </div>
-        <div className="mb-5">
+        </section>
+        <section className="">
           <p className="form__label">Email*</p>
           <input
             type="email"
@@ -192,13 +192,13 @@ const Profile = ({ doctorData }) => {
             value={formData.email}
             onChange={handleInputChange}
             placeholder="Email"
-            className="form_input"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
             readOnly
             aria-readonly
             disabled={false}
           />
-        </div>
-        <div className="mb-5">
+        </section>
+        <section className="">
           <p className="form__label">Phone*</p>
           <input
             type="number"
@@ -206,10 +206,10 @@ const Profile = ({ doctorData }) => {
             value={formData.phone}
             onChange={handleInputChange}
             placeholder="Phone number"
-            className="form_input"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
           />
-        </div>
-        <div className="mb-5">
+        </section>
+        <section className=" ">
           <p className="form__label">Bio*</p>
           <input
             type="text"
@@ -217,20 +217,20 @@ const Profile = ({ doctorData }) => {
             value={formData.bio}
             onChange={handleInputChange}
             placeholder="Bio"
-            className="form_input"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
             maxLength={100}
           />
-        </div>
+        </section>
 
-        <div className="mb-5">
-          <div className="grid grid-cols-3 gap-5 mb-[30px]">
-            <div>
+        <section className="">
+          <section className="flex flex-row justify-between ">
+            <section>
               <p className="form__label">Gender*</p>
               <select
                 name="gender"
                 value={formData.gender}
                 onChange={handleInputChange}
-                className="form__input py-3.5"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3 py-3.5"
                 defaultValue="male"
               >
                 <option value="">Select</option>
@@ -238,184 +238,200 @@ const Profile = ({ doctorData }) => {
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
-            </div>
-            <div>
+            </section>
+            <section>
               <p className="form__label">Specialization*</p>
               <select
                 name="specialization"
                 value={formData.specialization}
                 onChange={handleInputChange}
-                className="form__input py-3.5"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3 py-3.5"
               >
                 <option value="">Select</option>
                 <option value="surgeon">Surgeon</option>
                 <option value="neurologist">Neurologist</option>
                 <option value="dermatologist">Dermatologist</option>
               </select>
-            </div>
+            </section>
 
-            <div>
+            <section>
               <p className="form__label">Ticket Price</p>
               <input
                 type="number"
                 placeholder="100"
                 name="ticketPrice"
                 value={formData.ticketPrice}
-                className="form__input"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                 onChange={handleInputChange}
               />
-            </div>
-          </div>
-        </div>
+            </section>
+          </section>
+        </section>
 
-        <div className="mb-5">
+        <section className="">
           <p className="form__label">Qualifications*</p>
           {formData.qualifications?.map((item, index) => (
-            <div key={index}>
-              <div>
-                <div className="grid grid-cols-2 gap-5">
-                  <div>
+            <section key={index}>
+              <section>
+                <section className="grid grid-cols-2 gap-5">
+                  <section>
                     <p className="form__label">Starting Date*</p>
                     <input
                       type="date"
                       name="startingDate"
                       value={item.startingDate}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleQualificationChange(e, index)}
                     />
-                  </div>
-                  <div>
+                  </section>
+                  <section>
                     <p className="form__label">Ending Date*</p>
                     <input
                       type="date"
                       name="endingDate"
                       value={item.endingDate}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleQualificationChange(e, index)}
                     />
-                  </div>
-                </div>
+                  </section>
+                </section>
 
-                <div className="grid grid-cols-2 gap-5 mt-5">
-                  <div>
+                <section className="grid grid-cols-2 gap-5 mt-5">
+                  <section>
                     <p className="form__label">Degree*</p>
                     <input
                       type="text"
                       name="degree"
                       value={item.degree}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleQualificationChange(e, index)}
                     />
-                  </div>
-                  <div>
+                  </section>
+                  <section>
                     <p className="form__label">University*</p>
                     <input
                       type="text"
                       name="university"
                       value={item.university}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleQualificationChange(e, index)}
                     />
-                  </div>
-                </div>
+                  </section>
+                </section>
 
                 <button
                   onClick={(e) => deleteQualification(e, index)}
                   className="bg-red-600 p-2 rounded-full text-white text-[18px] mt-2 mb-[30px] cursor-pointer"
                 >
-                  <AiOutlineDelete />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    height="10px"
+                    width="10px"
+                    fill="red"
+                  >
+                    <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                  </svg>
                 </button>
-              </div>
-            </div>
+              </section>
+            </section>
           ))}
 
           <button
             onClick={addQualification}
-            className="bg-black py-2 px-5 rounded text-white h-fit cursor-pointer"
+            className="addQ border bg-slate-500  p-3  rounded  h-fit cursor-pointer"
           >
-            Add Qualifications
+            Add Qualifications+
           </button>
-        </div>
-        <div className="mb-5">
+        </section>
+        <section className="mb-5">
           <p className="form__label">Experiences*</p>
           {formData.experiences?.map((item, index) => (
-            <div key={index}>
-              <div>
-                <div className="grid grid-cols-2 gap-5">
-                  <div>
+            <section key={index}>
+              <section>
+                <section className="grid grid-cols-2 gap-5">
+                  <section>
                     <p className="form__label">Starting Date*</p>
                     <input
                       type="date"
                       name="startingDate"
                       value={item.startingDate}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleExperienceChange(e, index)}
                     />
-                  </div>
-                  <div>
+                  </section>
+                  <section>
                     <p className="form__label">Ending Date*</p>
                     <input
                       type="date"
                       name="endingDate"
                       value={item.endingDate}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleExperienceChange(e, index)}
                     />
-                  </div>
-                </div>
+                  </section>
+                </section>
 
-                <div className="grid grid-cols-2 gap-5 mt-5">
-                  <div>
+                <section className="grid grid-cols-2 gap-5 mt-5">
+                  <section>
                     <p className="form__label">Position*</p>
                     <input
                       type="text"
                       name="position"
                       value={item.position}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleExperienceChange(e, index)}
                     />
-                  </div>
-                  <div>
+                  </section>
+                  <section>
                     <p className="form__label">Hospital*</p>
                     <input
                       type="text"
                       name="hospital"
                       value={item.hospital}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleExperienceChange(e, index)}
                     />
-                  </div>
-                </div>
+                  </section>
+                </section>
 
                 <button
                   onClick={(e) => deleteExperience(e, index)}
-                  className="bg-red-600 p-2 rounded-full text-white text-[18px] mt-2 mb-[30px] cursor-pointer"
+                  className=" text-red-500 p-2 rounded-full text-[18px] mt-2 mb-[30px] cursor-pointer"
                 >
-                  <AiOutlineDelete />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    height="10px"
+                    width="10px"
+                    fill="red"
+                  >
+                    <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                  </svg>
                 </button>
-              </div>
-            </div>
+              </section>
+            </section>
           ))}
 
           <button
             onClick={addExperience}
-            className="bg-black py-2 px-5 rounded text-white h-fit cursor-pointer"
+            className="addQ border bg-black p-3 rounded  h-fit cursor-pointer"
           >
-            Add Experience
+            Add Experience+
           </button>
-        </div>
-        <div className="mb-5">
+        </section>
+        <section className="">
           <p className="form__label">Time Slots*</p>
           {formData.timeSlots?.map((item, index) => (
-            <div key={index}>
-              <div>
-                <div className="grid grid-cols-2 md:grid-cols-4 mb-[30px] gap-5">
-                  <div>
+            <section key={index}>
+              <section>
+                <section className="grid grid-cols-2 md:grid-cols-4 mb-[30px] gap-5">
+                  <section>
                     <p className="form__label">Day*</p>
                     <select
                       name="day"
                       value={item.day}
-                      className="form__input py-3.5"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3 py-3.5"
                       onChange={(e) => handleTimeSlotChange(e, index)}
                     >
                       <option value="">Select</option>
@@ -427,50 +443,58 @@ const Profile = ({ doctorData }) => {
                       <option value="friday">Friday</option>
                       <option value="saturday">Saturday</option>
                     </select>
-                  </div>
-                  <div>
+                  </section>
+                  <section>
                     <p className="form__label">Starting Time*</p>
                     <input
                       type="time"
                       name="startingTime"
                       value={item.startingTime}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleTimeSlotChange(e, index)}
                     />
-                  </div>
+                  </section>
 
-                  <div>
+                  <section>
                     <p className="form__label">Ending Time*</p>
                     <input
                       type="time"
                       name="endingTime"
                       value={item.endingTime}
-                      className="form__input"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                       onChange={(e) => handleTimeSlotChange(e, index)}
                     />
-                  </div>
+                  </section>
 
-                  <div
+                  <section
                     onClick={(e) => deleteTimeSlot(e, index)}
                     className="flex items-center"
                   >
-                    <button className="bg-red-600 p-2 rounded-full text-white text-[18px]  cursor-pointer mt-6 ">
-                      <AiOutlineDelete />
+                    <button className=" ">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                        height="10px"
+                        width="10px"
+                        fill="red"
+                      >
+                        <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                      </svg>
                     </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </section>
+                </section>
+              </section>
+            </section>
           ))}
 
           <button
             onClick={addTimeSlot}
-            className="bg-black py-2 px-5 rounded text-white h-fit cursor-pointer"
+            className="addQ bg-black py-2 px-5 rounded  h-fit cursor-pointer"
           >
-            Add TimeSlot
+            Add TimeSlot+
           </button>
-        </div>
-        <div className="mb-5">
+        </section>
+        <section className="">
           <p className="form__label">About*</p>
           <textarea
             name="about"
@@ -478,11 +502,11 @@ const Profile = ({ doctorData }) => {
             value={formData.about}
             placeholder="Write about you"
             onChange={handleInputChange}
-            className="form__input"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
           ></textarea>
-        </div>
+        </section>
 
-        <div className="mb-5 flex items-center gap-3">
+        <section className=" flex items-center gap-3">
           {formData.photo && (
             <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center ">
               <img
@@ -505,14 +529,14 @@ const Profile = ({ doctorData }) => {
 
             <label
               htmlFor="customfile"
-              className=" Upload-Photo absolute  top-0 left-2 w-full h-full flex items-center px-[1.75rem ] py-[5px] pt-[10px] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer"
+              className=" Upload-Photo absolute  top-0 left-2 w-full h-full flex items-center px-[1.75rem ] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer"
             >
               Upload Photo
             </label>
           </section>
-        </div>
+        </section>
 
-        <div className="mt-7">
+        <section className="">
           <button
             type="submit"
             onClick={updateProfileHandler}
@@ -521,9 +545,9 @@ const Profile = ({ doctorData }) => {
           >
             Update Profile
           </button>
-        </div>
+        </section>
       </form>
-    </div>
+    </section>
   );
 };
 

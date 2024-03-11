@@ -3,7 +3,7 @@ import { formateDate } from "../../utils/formateDate";
 const DoctorAbout = ({ name, about, qualifications, experiences }) => {
   return (
     <div>
-      <div>
+      <section>
         <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2 ">
           About of{" "}
           <span className="text-irisBlueColor font-bold text-[24px] leading-9">
@@ -11,8 +11,8 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
           </span>
         </h3>
         <p className="text__para ">{about}</p>
-      </div>
-      <div className="mt-12">
+      </section>
+      <section className="mt-12">
         <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold">
           Education
         </h3>
@@ -37,9 +37,9 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
             </li>
           ))}
         </ul>
-      </div>
+      </section>
 
-      <div className="mt-12">
+      <section className="mt-2">
         <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold">
           Experience
         </h3>
@@ -59,7 +59,7 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
             </li>
           ))}
         </ul>
-      </div>
+      </section>
     </div>
   );
 };

@@ -58,3 +58,14 @@
     @apply text-[16px] leading-7 mt-3;
   }
 }
+
+.addQ{
+  @apply border bg-slate-200
+}
+.addD{
+  @apply border text-white bg-black hover:bg-white hover:text-black
+}
+
+.DelSVG{
+  @apply text-red-500
+}

@@ -21,6 +21,7 @@ const Signup = () => {
     gender: "",
     role: "",
     specialization: "",
+    bloodTpye:"",
     charges: "",
   });
 
@@ -189,6 +190,27 @@ const Signup = () => {
                     <option value="Other">Other</option>
                   </select>
                 </label>
+                {formData.role === "patient" && (
+                  <label
+                    htmlFor="bloodGroup"
+                    className="text-headingColor font-bold text-[16px] leading-7"
+                  >
+                    Blood Group:{" "}
+                    <select
+                      name="bloodTpye"
+                      value={formData.bloodTpye}
+                      onChange={handleInputChange}
+                      className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none"
+                      id="bloodTpye"
+                    >
+                      <option value="">Select</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="AB">AB</option>
+                      <option value="O">O</option>
+                    </select>
+                  </label>
+                )}
               </section>
 
               {formData.role === "doctor" && (
