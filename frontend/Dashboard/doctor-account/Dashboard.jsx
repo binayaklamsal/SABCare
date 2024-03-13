@@ -51,7 +51,7 @@ const Dashboard = () => {
             <section className="pt-2">
               {tab == "overview" && (
                 <section className="">
-                  <div className="flex flex-col items-center gap-4 pt-2 mb-10">
+                  <div className="flex flex-row items-center gap-4 pt-2 mb-10">
                     <figure className="max-w-[200px] max-h-[200px]">
                       <img src={data?.photo} alt="" className="w-full" />
                     </figure>

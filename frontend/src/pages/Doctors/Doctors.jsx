@@ -1,22 +1,16 @@
 import DoctorCard from "./../../components/Doctors/DoctorCard";
-import { doctors } from "./../../assets/data/doctors";
 import { useEffect, useState } from "react";
-// import Testimonial from './../../components/Testimonial/Testimonial';
 import { BASE_URL } from "./../../config";
 import useFetchData from "./../../hooks/useFetchData";
 import Loader from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
-import Testimonial from "../../components/Testimonial/Testimonial";
 
-//search yeta xa hai searching ko barema setquery method
 const Doctors = () => {
   const [query, setQuery] = useState("");
   const [debounceQuery, setDebounceQuery] = useState("");
 
   const handleSearch = () => {
     setQuery(query.trim());
-
-    console.log("handle search");
   };
 
   useEffect(() => {
@@ -32,7 +26,76 @@ const Doctors = () => {
     error,
   } = useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`);
 
-  console.log(doctors, "this is my doctors ");
+  // Implementing Quick Sort algorithm
+  const quickSort = (array) => {
+    if (array.length <= 1) {
+      return array;
+    }
+
+    const pivot = array[0];
+    const left = [];
+    const right = [];
+
+    for (let i = 1; i < array.length; i++) {
+      if (array[i].name < pivot.name) {
+        left.push(array[i]);
+      } else {
+        right.push(array[i]);
+      }
+    }
+
+    return [...quickSort(left), pivot, ...quickSort(right)];
+  };
+
+  // Implementing Binary Search Algorithm with All Occurrences
+  const binarySearchAll = (array, target) => {
+    let left = 0;
+    let right = array.length - 1;
+    const results = [];
+
+    while (left <= right) {
+      const mid = Math.floor((left + right) / 2);
+
+      if (
+        array[mid] &&
+        array[mid].name &&
+        array[mid].name.toLowerCase().includes(target.toLowerCase())
+      ) {
+        // Doctor found, add to results
+        results.push(array[mid]);
+
+        // Move left and right pointers to find other matching doctors
+        let i = mid - 1;
+        while (
+          i >= left &&
+          array[i] &&
+          array[i].name &&
+          array[i].name.toLowerCase().includes(target.toLowerCase())
+        ) {
+          results.push(array[i]);
+          i--;
+        }
+        i = mid + 1;
+        while (
+          i <= right &&
+          array[i] &&
+          array[i].name &&
+          array[i].name.toLowerCase().includes(target.toLowerCase())
+        ) {
+          results.push(array[i]);
+          i++;
+        }
+
+        return results;
+      }
+    }
+  };
+
+
+  const sortedDoctors = quickSort(doctors);
+
+
+  const searchResults = binarySearchAll(sortedDoctors, debounceQuery);
 
   return (
     <>
@@ -47,7 +110,6 @@ const Doctors = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-
             <button
               className="btn mt-0 rounded-[0px] rounded-r-md "
               onClick={handleSearch}
@@ -63,30 +125,16 @@ const Doctors = () => {
             {error && <Error />}
             {!loading && !error && (
               <div className="grid grid-cols-1 sm-grid-cols-2 md:grid-cols-3b lg:grid-cols-4 gap-5 ">
-                {Array.isArray(doctors) &&
-                  doctors.map((doctor) => (
-                    <DoctorCard key={doctor._id} doctor={doctor} />
-                  ))}
+                {searchResults.map((doctor) => (
+                  <DoctorCard key={doctor._id} doctor={doctor} />
+                ))}
               </div>
             )}
           </div>
         </section>
       </section>
-
-      <section className=" ">
-        <div className="container">
-          <div className="xl:w-[470px] mx-auto">
-            <h2 className="heading text-center">What our patient say</h2>
-            <p className="text_para text-center">
-              World class care for everyone. Our health system offers unmatched,
-              expert health care.
-            </p>
-          </div>
-
-          <Testimonial />
-        </div>
-      </section>
     </>
   );
 };
+
 export default Doctors;
