@@ -69,3 +69,7 @@
 .DelSVG{
   @apply text-red-500
 }
+
+.flexCol{
+  @apply flex flex-col !gap-2
+}

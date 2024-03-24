@@ -11,12 +11,14 @@ const Doctors = () => {
 
   const handleSearch = () => {
     setQuery(query.trim());
+    console.log("handle search");
   };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setDebounceQuery(query);
     }, 700);
+
     return () => clearTimeout(timeout);
   }, [query]);
 
@@ -26,76 +28,46 @@ const Doctors = () => {
     error,
   } = useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`);
 
-  // Implementing Quick Sort algorithm
-  const quickSort = (array) => {
-    if (array.length <= 1) {
-      return array;
-    }
-
-    const pivot = array[0];
-    const left = [];
-    const right = [];
-
-    for (let i = 1; i < array.length; i++) {
-      if (array[i].name < pivot.name) {
-        left.push(array[i]);
-      } else {
-        right.push(array[i]);
-      }
-    }
-
-    return [...quickSort(left), pivot, ...quickSort(right)];
-  };
-
-  // Implementing Binary Search Algorithm with All Occurrences
-  const binarySearchAll = (array, target) => {
+  const binarySearch = (arr, target) => {
     let left = 0;
-    let right = array.length - 1;
-    const results = [];
+    let right = arr.length - 1;
+    const result = [];
 
     while (left <= right) {
       const mid = Math.floor((left + right) / 2);
 
-      if (
-        array[mid] &&
-        array[mid].name &&
-        array[mid].name.toLowerCase().includes(target.toLowerCase())
-      ) {
-        // Doctor found, add to results
-        results.push(array[mid]);
+      if (arr[mid].name.toLowerCase().includes(target.toLowerCase())) {
+        result.push(arr[mid]);
 
-        // Move left and right pointers to find other matching doctors
-        let i = mid - 1;
+        let temp = mid - 1;
         while (
-          i >= left &&
-          array[i] &&
-          array[i].name &&
-          array[i].name.toLowerCase().includes(target.toLowerCase())
+          temp >= 0 &&
+          arr[temp].name.toLowerCase().includes(target.toLowerCase())
         ) {
-          results.push(array[i]);
-          i--;
+          result.push(arr[temp]);
+          temp--;
         }
-        i = mid + 1;
+        temp = mid + 1;
         while (
-          i <= right &&
-          array[i] &&
-          array[i].name &&
-          array[i].name.toLowerCase().includes(target.toLowerCase())
+          temp < arr.length &&
+          arr[temp].name.toLowerCase().includes(target.toLowerCase())
         ) {
-          results.push(array[i]);
-          i++;
+          result.push(arr[temp]);
+          temp++;
         }
 
-        return results;
+        return result;
+      } else if (arr[mid].name.toLowerCase() < target.toLowerCase()) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
       }
     }
+
+    return [];
   };
 
-
-  const sortedDoctors = quickSort(doctors);
-
-
-  const searchResults = binarySearchAll(sortedDoctors, debounceQuery);
+  const searchResults = binarySearch(doctors, debounceQuery);
 
   return (
     <>
@@ -124,7 +96,7 @@ const Doctors = () => {
             {loading && <Loader />}
             {error && <Error />}
             {!loading && !error && (
-              <div className="grid grid-cols-1 sm-grid-cols-2 md:grid-cols-3b lg:grid-cols-4 gap-5 ">
+              <div className="grid grid-cols-1 sm-grid-cols-2 md:grid-cols-3b lg:grid-cols-3 gap-5 ">
                 {searchResults.map((doctor) => (
                   <DoctorCard key={doctor._id} doctor={doctor} />
                 ))}

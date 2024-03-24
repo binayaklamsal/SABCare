@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import logo1 from '../../assets/images/logo1.png';
-import { RiLinkedinFill } from 'react-icons/ri';
-import { AiFillFacebook, AiFillGithub, AiOutlineInstagram } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import logo1 from "../../assets/images/logo1.png";
+import { RiLinkedinFill } from "react-icons/ri";
+import {
+  AiFillFacebook,
+  AiFillGithub,
+  AiOutlineInstagram,
+} from "react-icons/ai";
 
 const socialLinks = [
   {
@@ -25,49 +29,49 @@ const socialLinks = [
 
 const quickLinks01 = [
   {
-    path: '/home',
+    path: "/home",
     display: "Home",
   },
   {
-    path: '/',
+    path: "/",
     display: "About Us",
   },
   {
-    path: '/services',
+    path: "/services",
     display: "Services",
   },
   {
-    path: '/',
+    path: "/",
     display: "Blog",
   },
 ];
 
 const quickLinks02 = [
   {
-    path: '/find-a-doctor',
+    path: "/find-a-doctor",
     display: "Find a Doctor",
   },
   {
-    path: '/',
+    path: "/",
     display: "Request an Appointment",
   },
   {
-    path: '/',
+    path: "/",
     display: "Find a Location",
   },
   {
-    path: '/',
+    path: "/",
     display: "Get an Opinion",
   },
 ];
 
 const quickLinks03 = [
   {
-    path: '/',
+    path: "/",
     display: "Donate",
   },
   {
-    path: '/contact',
+    path: "/contact",
     display: "Contact Us",
   },
 ];
@@ -84,7 +88,7 @@ const Footer = () => {
             <p className="text-[16px] leading-7 text-textColor mt-4 mx-[55px]">
               Copyright {year} developed by ©SABCare , all rights reserved
             </p>
-  
+
             <div className="flex items-center gap-3 mt-4 mx-[55px]">
               {socialLinks.map((link, index) => (
                 <a
@@ -99,88 +103,75 @@ const Footer = () => {
               ))}
             </div>
           </div>
-  
 
-  <div className="flex flex-row gap-[100px]  md:ml-[250px]">
-          <div>
-           
-            <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor"> Quick Links</h2>
+          <div className="flex flex-row gap-[100px]  md:ml-[250px]">
+            <div>
+              <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor">
+                {" "}
+                Quick Links
+              </h2>
 
+              <ul>
+                {quickLinks01.map((item, index) => (
+                  <li key={index} className="mb-4">
+                    <Link
+                      to={item.path}
+                      className=" text-[16px] leading-7 font-[400] text-textColor "
+                    >
+                      {" "}
+                      {item.display}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
+            <div>
+              <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor">
+                {" "}
+                I want to:
+              </h2>
 
-                    <ul>
-                      {
-                        quickLinks01.map((item,index) => (
-                          <li key={index} className="mb-4">
-                            <Link to={item.path} className=" text-[16px] leading-7 font-[400] text-textColor "> {
-                              item.display
-                            }
+              <ul>
+                {quickLinks02.map((item, index) => (
+                  <li key={index} className="mb-4">
+                    <Link
+                      to={item.path}
+                      className=" text-[16px] leading-7 font-[400] text-textColor "
+                    >
+                      {" "}
+                      {item.display}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-                            </Link>
+            <div>
+              <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor">
+                {" "}
+                Support
+              </h2>
 
-                          </li>
-                        ))
-                      }
-                    </ul>
-
-
-
+              <ul>
+                {quickLinks03.map((item, index) => (
+                  <li key={index} className="mb-4">
+                    <Link
+                      to={item.path}
+                      className=" text-[16px] leading-7 font-[400] text-textColor "
+                    >
+                      {" "}
+                      {item.display}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-
-          <div>
-           
-           <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor"> I want to:</h2>
-
-
-
-                   <ul>
-                     {
-                       quickLinks02.map((item,index) => (
-                         <li key={index} className="mb-4">
-                           <Link to={item.path} className=" text-[16px] leading-7 font-[400] text-textColor "> {
-                             item.display
-                           }
-
-                           </Link>
-
-                         </li>
-                       ))
-                     }
-                   </ul>
-
-
-
-         </div>
-
-         <div>
-           
-           <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor"> Support</h2>
-
-
-
-                   <ul>
-                     {
-                       quickLinks03.map((item,index) => (
-                         <li key={index} className="mb-4">
-                           <Link to={item.path} className=" text-[16px] leading-7 font-[400] text-textColor "> {
-                             item.display
-                           }
-
-                           </Link>
-
-                         </li>
-                       ))
-                     }
-                   </ul>
-
-                  </div>
-                  </div>
-         </div>
         </div>
-      
+      </div>
     </footer>
   );
-  
 };
 
 export default Footer;

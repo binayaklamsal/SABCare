@@ -16,7 +16,7 @@ const Tabs = ({ tab, setTab }) => {
   return (
     <section className=" grid grid-cols-2 ">
       <section></section>
-      <section className="tabs flex flex-col w-auto  gap-3 bg-slate-500  rounded-md shadow-md  px-2 py-3">
+      <section className="tabs flex flex-col w-auto  gap-3 bg-slate-500  rounded-md  px-2 py-3">
         <section className="tabsB flex flex-col gap-2 border px-6 rounded-md shadow-md  bg-slate-500">
           <button
             onClick={() => setTab("overview")}

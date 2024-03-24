@@ -32,7 +32,7 @@ console.log(decoded.id, "decoded id ")
     }
 }
 
-export const restrict = roles=> async(req,res,next)=>{
+export const restrict = roles => async(req,res,next)=>{
     const userId = req.userId
 
     let user;
