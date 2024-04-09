@@ -21,7 +21,7 @@ const Signup = () => {
     gender: "",
     role: "",
     specialization: "",
-    bloodTpye:"",
+    bloodTpye: "",
     charges: "",
   });
 

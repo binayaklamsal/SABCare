@@ -9,15 +9,15 @@ const DoctorCard = ({ doctor }) => {
     doctor;
 
   return (
-    <section className=" flex flex-col justify-between   border px-3 rounded-md shadow-md w-[400px]">
+    <section className=" flex flex-col justify-between   border px-3 rounded-md  w-[400px]">
       <span className="flex flex-col gap-3">
         <img
           src={photo || DefaultPhoto}
           alt=""
-          className="w-[370px] h-[300px] object-cover"
+          className="w-[370px] h-[300px] object-cover rounded-md"
         />
 
-        <section className="flex items-center justify-center w-[120px] p-2  bg-[#CCF0F3] text-[#01B5C5] rounded-md">
+        <section className="flex items-center justify-center w-[150px] p-2  bg-[#CCF0F3] text-[#01B5C5] rounded-md object-cover">
           {specialization}
         </section>
       </span>
