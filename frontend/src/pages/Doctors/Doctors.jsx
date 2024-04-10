@@ -78,7 +78,7 @@ const Doctors = () => {
             <input
               type="search"
               className="py-2 pl-2 pt-[10px] bg-transparent w-full focus:outline-none cursor-pointer placeholder:text-textColor"
-              placeholder="Search doctor by name or specification"
+              placeholder="Search doctor "
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
