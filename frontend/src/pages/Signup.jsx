@@ -25,13 +25,51 @@ const Signup = () => {
     charges: "",
   });
 
-  const navigate = useNavigate();
-
   const handleInputChange = (e) => {
-    console.log({ [e.target.name]: e.target.value });
-
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    console.log(name, value);
+    setFormData((pre) => {
+      return {
+        ...pre,
+        [name]: value,
+      };
+    });
   };
+
+  const [isValidate, setIsValidate] = useState(false);
+
+  const validation = () => {
+    let err = {};
+    const nameRegex = /^[A-Za-z]+$/;
+
+    if (!formData.name) {
+      err = { ...err, name: "Name is required" };
+    } else if (!nameRegex.test(formData.name)) {
+      err = { ...err, name: "Name should contain only letters" };
+    }
+
+    if (!formData.email) {
+      err = { ...err, email: "Email is required" };
+    } else {
+      // Email format validation using a simple regex pattern
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        err = { ...err, email: "Invalid email format" };
+      }
+    }
+
+    if (!formData.password) {
+      err = { ...err, password: "Password is required" };
+    } else if (formData.password.length < 6) {
+      err = { ...err, password: "Password must be at least 6 characters long" };
+    }
+
+    // Additional validations for other fields can be added similarly
+
+    return err;
+  };
+
+  const navigate = useNavigate();
 
   const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
@@ -42,9 +80,17 @@ const Signup = () => {
     setSelectedFile(data.url);
     setFormData({ ...formData, photo: data.url });
   };
-
   const submitHandler = async (event) => {
     event.preventDefault();
+
+    // Validate form inputs
+    const validationErrors = validation();
+    if (Object.keys(validationErrors).length > 0) {
+      // If there are validation errors, display them and prevent form submission
+      console.log(validationErrors); // You can display validation errors to the user
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -53,7 +99,6 @@ const Signup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(formData),
       });
 
@@ -100,6 +145,10 @@ const Signup = () => {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none  focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
                   />
+                  {/* <p className="text-red-500">{errors?.name}</p> */}
+                  {isValidate && errors.name && (
+                    <p className="text-red-500">{errors.name}</p>
+                  )}
                 </section>
 
                 <section className="mb-0.1 mt-[-30px]">
@@ -273,4 +322,5 @@ const Signup = () => {
     </section>
   );
 };
+
 export default Signup;
